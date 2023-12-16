@@ -1,0 +1,55 @@
+/* TEXT */
+.title,
+.turn-info {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* CELLS */
+[type="checkbox"] {
+  display: none;
+
+  & + label {
+    position: relative;
+    cursor: pointer;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+  }
+}
+
+.nought,
+.cross {
+  pointer-events: none;
+}
+
+.nought::after,
+.cross::after {
+  position: absolute;
+  display: grid;
+  place-content: center;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.nought::after {
+  content: "O";
+  background-color: orange;
+}
+
+.cross::after {
+  content: "X";
+  background-color: blue;
+}
+
+/* GRID */
+.checkbox-grid {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 25vw;
+  column-gap: 1rem;
+  row-gap: 1rem;
+}
