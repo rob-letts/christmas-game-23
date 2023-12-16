@@ -1,2 +1,3 @@
 # christmas-game-23
-Another Christmas game for my niece.
+
+Ho ho ho, Work in progress.
