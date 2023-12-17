@@ -1,19 +1,48 @@
-import { For, createSignal } from 'solid-js';
+import { createSignal, Show, Index } from 'solid-js';
 import './App.css';
 
-function App () {
+export default function App () {
+  const [playing, setPlaying] = createSignal(true);
+  const [result, setResult] = createSignal(`It's a tie!`);
+  const [turn, setTurn] = createSignal(0);
   const [isNoughtsTurn, setIsNoughtsTurn] = createSignal(true);
   const [checks, setChecks] = createSignal(Array.from({ length: 9 }, () => ``));
+  const winConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 
-  function change (index) {
-    setChecks(checks().map((check, i) =>
-      i === index
-        ? isNoughtsTurn()
-          ? `nought`
-          : `cross`
-        : check
-    ));
+  function changeTurn () {
     setIsNoughtsTurn(!isNoughtsTurn());
+    setTurn(turn() + 1);
+    if (turn() > 8) setPlaying(false);
+  }
+
+  function checkForWin (index) {
+    const symbol = checks().at(index);
+
+    const playerWon = winConditions.some(condition => {
+      return condition.every(index => checks().at(index) === symbol);
+    });
+
+    if (playerWon) declareWinner(symbol);
+  }
+
+  function declareWinner (symbol) {
+    const name = symbol.charAt(0).toUpperCase() + symbol.slice(1);
+    setResult(`${name} wins!`);
+    setPlaying(false);
+  }
+
+  function updateGameState (index) {
+    setChecks(checks().toSpliced(index, 1, isNoughtsTurn() ? `nought` : `cross`));
+    if (turn() >= 4) checkForWin(index);
+    changeTurn();
+  }
+
+  function resetGameState () {
+    setPlaying(true);
+    setResult(`It's a tie!`);
+    setTurn(0);
+    setIsNoughtsTurn(true);
+    setChecks(Array.from({ length: 9 }, () => ``));
   }
 
   return (
@@ -21,30 +50,44 @@ function App () {
       <header>
         <h1 class="title">Merry Christmas River</h1>
       </header>
-      <fieldset>
-        <legend class="turn-info">
-          {isNoughtsTurn() ? `Noughts` : `Crosses`} turn
-        </legend>
+
+      <fieldset class="game">
+        <Show
+          when={playing()}
+          fallback={<p class="result">{result()}</p>}
+        >
+          <legend class="current-turn">
+            {isNoughtsTurn() ? `Noughts` : `Crosses`} turn
+          </legend>
+        </Show>
         <div class="checkbox-grid">
-          <For each={checks()}>
-            {(check, i) =>
+          <Index each={checks()}>
+            {(_, index) =>
               <>
                 <input
                   type="checkbox"
-                  id={i()}
-                  onClick={() => change(i())}
+                  disabled={!playing()}
+                  id={index}
+                  onClick={() => updateGameState(index)}
                 />
                 <label
-                  class={checks()[i()]}
-                  for={i()}
+                  class={checks().at(index)}
+                  for={index}
                 />
               </>
             }
-          </For>
+          </Index>
         </div>
       </fieldset>
+
+      <Show when={!playing()}>
+        <button
+          class="reset-button"
+          onClick={() => resetGameState()}
+        >
+          Play again?
+        </button>
+      </Show>
     </>
   );
 }
-
-export default App;
