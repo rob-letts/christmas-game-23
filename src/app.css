@@ -1,8 +1,13 @@
-/* TEXT */
+/* LAYOUT */
 .title,
-.turn-info {
-  text-align: center;
+.current-turn,
+.result,
+.game {
   margin-bottom: 2rem;
+}
+
+.reset-button {
+  padding: 0.5rem 1rem;
 }
 
 /* CELLS */
@@ -11,10 +16,13 @@
 
   & + label {
     position: relative;
-    cursor: pointer;
     padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 0.25rem;
+  }
+
+  &:not(:disabled) + label {
+    cursor: pointer;
   }
 }
 
@@ -31,25 +39,29 @@
   inset: 0;
   height: 100%;
   width: 100%;
+  padding-top: 6px;
 }
 
 .nought::after {
-  content: "O";
+  content: url('./assets/nought.svg');
   background-color: orange;
 }
 
 .cross::after {
-  content: "X";
+  content: url('./assets/cross.svg');
   background-color: blue;
 }
 
 /* GRID */
 .checkbox-grid {
+  --cell-size: 50px;
+
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, var(--cell-size));
+  grid-template-rows: repeat(3, var(--cell-size));
   width: 25vw;
   column-gap: 1rem;
+  place-content: center;
   row-gap: 1rem;
 }
