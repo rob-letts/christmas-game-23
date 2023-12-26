@@ -83,7 +83,7 @@ export default function App () {
       <Show when={!playing()}>
         <button
           class="reset-button"
-          onClick={() => resetGameState()}
+          onClick={resetGameState}
         >
           Play again?
         </button>
