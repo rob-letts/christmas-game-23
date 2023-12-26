@@ -1,3 +1,18 @@
+:root {
+  --large: clamp(1.25rem, 0.4371rem + 3.4682vw, 3.125rem);
+  --primary: #ED2E8F;
+  --secondary: #00C3F4;
+
+  --noughts-icon: url('./assets/nought.svg');
+  --cross-icon: url('./assets/cross.svg');
+  --barbie-icon: url('./assets/barbie.svg');
+  --wonka-icon: url('./assets/wonka.svg');
+  --donatello-icon: url('./assets/donatello.svg');
+
+  --player-a-icon: var(--noughts-icon);
+  --player-b-icon: var(--cross-icon);
+}
+
 *,
 *::before,
 *::after {
@@ -12,14 +27,16 @@
 html {
   height: 100%;
   line-height: 1.5;
-  font-family: system-ui, sans-serif;
+  font-family: 'Poppins', system-ui, sans-serif;
   text-rendering: optimizeSpeed;
+  color: var(--primary);
 }
 
 body {
   height: 100%;
   padding: 2rem;
   text-align: center;
+  background-color: var(--secondary);
 }
 
 img {

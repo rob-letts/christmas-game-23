@@ -1,3 +1,24 @@
+@font-face {
+  font-family: "Bartex";
+  src: url("/Bartex.ttf");
+}
+
+/* TEXT */
+.title {
+  font-size: var(--large);
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+}
+
+.barbie {
+  letter-spacing: 4px;
+  font-family: "Bartex";
+  font-size: 1.5em;
+  padding-left: 3px;
+}
+
 /* LAYOUT */
 .title,
 .current-turn,
@@ -10,14 +31,28 @@
   padding: 0.5rem 1rem;
 }
 
+/* GRID */
+.checkbox-grid {
+  --cell-size: 50px;
+
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, var(--cell-size));
+  grid-template-rows: repeat(3, var(--cell-size));
+  width: 40vw;
+  column-gap: 3rem;
+  place-content: center;
+  row-gap: 3rem;
+}
+
 /* CELLS */
 [type="checkbox"] {
   display: none;
 
   & + label {
     position: relative;
-    padding: 1rem;
-    border: 1px solid #ccc;
+    padding: 2rem;
+    border: 2px solid #FFF;
     border-radius: 0.25rem;
   }
 
@@ -40,28 +75,39 @@
   height: 100%;
   width: 100%;
   padding-top: 6px;
+  background-color: var(--primary);
+  overflow: hidden;
 }
 
 .nought::after {
-  content: url('./assets/nought.svg');
-  background-color: orange;
+  content: var(--player-a-icon);
 }
 
 .cross::after {
-  content: url('./assets/cross.svg');
-  background-color: blue;
+  content: var(--player-b-icon)
 }
 
-/* GRID */
-.checkbox-grid {
-  --cell-size: 50px;
+/* ICONS */
+.player-a-barbie {
+  --player-a-icon: var(--barbie-icon);
+}
 
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, var(--cell-size));
-  grid-template-rows: repeat(3, var(--cell-size));
-  width: 25vw;
-  column-gap: 1rem;
-  place-content: center;
-  row-gap: 1rem;
+.player-a-wonka {
+  --player-a-icon: var(--wonka-icon);
+}
+
+.player-a-donatello {
+  --player-a-icon: var(--donatello-icon);
+}
+
+.player-b-barbie {
+  --player-b-icon: var(--barbie-icon);
+}
+
+.player-b-wonka {
+  --player-b-icon: var(--wonka-icon);
+}
+
+.player-b-donatello {
+  --player-b-icon: var(--donatello-icon);
 }
