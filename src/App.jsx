@@ -47,7 +47,10 @@ export default function App () {
   return (
     <>
       <header>
-        <h1 class="title">Merry Christmas River</h1>
+        <h1 class="title">
+          <span>Merry Christmas</span>
+          <span class="barbie">River</span>
+        </h1>
       </header>
 
       <fieldset class="game">
