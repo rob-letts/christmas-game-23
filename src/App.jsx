@@ -2,12 +2,12 @@ import { createSignal, createMemo, Show, Index } from 'solid-js';
 import './App.css';
 
 export default function App () {
+  const winConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+
   const [playing, setPlaying] = createSignal(true);
   const [result, setResult] = createSignal(`It's a tie!`);
-  const [turn, setTurn] = createSignal(0);
-  const [isNoughtsTurn, setIsNoughtsTurn] = createSignal(true);
   const [checks, setChecks] = createSignal(Array.from({ length: 9 }, () => ``));
-  const winConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+  const [turn, setTurn] = createSignal(0);
   const isNoughtsTurn = createMemo(() => turn() % 2 === 0);
 
   function changeTurn () {
