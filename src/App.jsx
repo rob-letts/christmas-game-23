@@ -1,4 +1,4 @@
-import { createSignal, Show, Index } from 'solid-js';
+import { createSignal, createMemo, Show, Index } from 'solid-js';
 import './App.css';
 
 export default function App () {
@@ -8,9 +8,9 @@ export default function App () {
   const [isNoughtsTurn, setIsNoughtsTurn] = createSignal(true);
   const [checks, setChecks] = createSignal(Array.from({ length: 9 }, () => ``));
   const winConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+  const isNoughtsTurn = createMemo(() => turn() % 2 === 0);
 
   function changeTurn () {
-    setIsNoughtsTurn(!isNoughtsTurn());
     setTurn(turn() + 1);
     if (turn() > 8) setPlaying(false);
   }
@@ -41,7 +41,6 @@ export default function App () {
     setPlaying(true);
     setResult(`It's a tie!`);
     setTurn(0);
-    setIsNoughtsTurn(true);
     setChecks(Array.from({ length: 9 }, () => ``));
   }
 
