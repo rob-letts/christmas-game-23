@@ -72,6 +72,10 @@ export default function App () {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
+  function getImageUrl (name) {
+    return new URL(`./assets/${name}.png`, import.meta.url).href;
+  }
+
   return (
     <>
       <header>
@@ -91,14 +95,14 @@ export default function App () {
                 class="player-photo current-turn winning-photo"
                 height="200"
                 width="200"
-                src={`/src/assets/${playerA()}.png`}
+                src={getImageUrl(playerA())}
                 alt={`profile photo of ${capitalise(playerA())}`}
               />
               <img
                 class="player-photo current-turn winning-photo"
                 height="200"
                 width="200"
-                src={`/src/assets/${playerB()}.png`}
+                src={getImageUrl(playerB())}
                 alt={`profile photo of ${capitalise(playerB())}`}
               />
             </div>
@@ -112,7 +116,7 @@ export default function App () {
             class="player-photo current-turn winning-photo"
             height="200"
             width="200"
-            src={`/src/assets/${winner()}.png`}
+            src={getImageUrl(winner())}
             alt={`profile photo of ${capitalise(winner())}`}
           />
         </Show>
@@ -133,7 +137,7 @@ export default function App () {
                 <img
                   height="150"
                   width="150"
-                  src={`/src/assets/${player}.png`}
+                  src={getImageUrl(player)}
                   alt={`profile photo of ${capitalise(player)}`}
                 />
               </button>
@@ -151,7 +155,7 @@ export default function App () {
                 class="player-photo"
                 height="200"
                 width="200"
-                src={`/src/assets/${playerA()}.png`}
+                src={getImageUrl(playerA())}
                 alt={`profile photo of ${capitalise(playerA())}`}
               />
             </aside>
@@ -186,7 +190,7 @@ export default function App () {
                 class="player-photo"
                 height="200"
                 width="200"
-                src={`/src/assets/${playerB()}.png`}
+                src={getImageUrl(playerB())}
                 alt={`profile photo of ${capitalise(playerB())}`}
               />
             </aside>
