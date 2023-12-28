@@ -1,5 +1,5 @@
 import { createSignal, createMemo, Show, Index, Switch, Match, For } from 'solid-js';
-import './App.css';
+import './app.css';
 
 export default function App () {
   // CONSTANTS
