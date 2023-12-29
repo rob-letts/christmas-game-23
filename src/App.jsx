@@ -108,8 +108,8 @@ export default function App () {
             </div>
           </>
         }>
-          <h2 class="result">
-            {`${capitalise(winner())} wins!`}
+          <h2 class="result capitalise">
+            {`${winner()} wins!`}
           </h2>
 
           <img
@@ -149,7 +149,6 @@ export default function App () {
         <Match when={playing()}>
           <section class="game-wrapper">
             <aside>
-              <h3 class="player-name">{capitalise(playerA())}</h3>
               <img
                 classList={{'current-turn': isPlayerATurn()}}
                 class="player-photo"
@@ -157,11 +156,12 @@ export default function App () {
                 width="200"
                 src={getImageUrl(playerA())}
                 alt={`profile photo of ${capitalise(playerA())}`}
+              <h3 class="player-name capitalise">{playerA()}</h3>
               />
             </aside>
             <fieldset class="game">
-              <legend class="game-legend">
-                {capitalise(isPlayerATurn() ? playerA() : playerB())}'s turn
+              <legend class="game-legend capitalise">
+                {isPlayerATurn() ? playerA() : playerB()}'s Turn
               </legend>
 
               <div class="checkbox-grid">
@@ -184,7 +184,6 @@ export default function App () {
               </div>
             </fieldset>
             <aside>
-              <h3 class="player-name">{capitalise(playerB())}</h3>
               <img
                 classList={{'current-turn': !isPlayerATurn()}}
                 class="player-photo"
@@ -192,6 +191,7 @@ export default function App () {
                 width="200"
                 src={getImageUrl(playerB())}
                 alt={`profile photo of ${capitalise(playerB())}`}
+              <h3 class="player-name capitalise">{playerB()}</h3>
               />
             </aside>
           </section>
