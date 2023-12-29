@@ -5,7 +5,8 @@ import Photo from './components/Photo';
 export default function App () {
   // CONSTANTS
   const winConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
-  const players = [`river`, `bobby`, `kiki`, `lavender`, `ethan`, `charlotte`, `barbie`, `wonka`, `donatello`];
+  const characters = [`river`, `bobby`, `kiki`, `lavender`, `ethan`, `charlotte`, `barbie`, `wonka`, `donatello`];
+  const emptyCheckBoard = Array.from({ length: 9 }, () => ``);
 
   // STATE
   const [characterSelection, setCharacterSelection] = createSignal(true);
@@ -13,7 +14,7 @@ export default function App () {
   const [playerB, setPlayerB] = createSignal(null);
   const [winner, setWinner] = createSignal(null);
   const [playing, setPlaying] = createSignal(true);
-  const [checks, setChecks] = createSignal(Array.from({ length: 9 }, () => ``));
+  const [checks, setChecks] = createSignal(emptyCheckBoard);
   const [turn, setTurn] = createSignal(0);
   const isPlayerATurn = createMemo(() => turn() % 2 === 0);
 
@@ -64,7 +65,7 @@ export default function App () {
   function resetGameState () {
     setPlaying(true);
     setTurn(0);
-    setChecks(Array.from({ length: 9 }, () => ``));
+    setChecks(emptyCheckBoard);
     setWinner(null);
   }
 
@@ -114,7 +115,7 @@ export default function App () {
           </h2>
 
           <div class="player-grid">
-            <For each={players}>{player =>
+            <For each={characters}>{player =>
               <button
                 onClick={() => selectCharacter(player)}
                 classList={{selected: player === playerA()}}
