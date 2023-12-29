@@ -1,5 +1,6 @@
 import { createSignal, createMemo, Show, Index, Switch, Match, For } from 'solid-js';
 import './app.css';
+import Photo from './components/Photo';
 
 export default function App () {
   // CONSTANTS
@@ -67,15 +68,6 @@ export default function App () {
     setWinner(null);
   }
 
-  // HELPER FUNCTIONS
-  function capitalise (string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
-  function getImageUrl (name) {
-    return new URL(`./assets/${name}.png`, import.meta.url).href;
-  }
-
   return (
     <>
       <header>
@@ -91,19 +83,15 @@ export default function App () {
           <>
             <h2 class="result">It's a tie!</h2>
             <div class="tie-wrapper">
-              <img
+              <Photo
+                size="200"
+                name={playerA()}
                 class="player-photo current-turn winning-photo"
-                height="200"
-                width="200"
-                src={getImageUrl(playerA())}
-                alt={`profile photo of ${capitalise(playerA())}`}
               />
-              <img
+              <Photo
+                size="200"
+                name={playerB()}
                 class="player-photo current-turn winning-photo"
-                height="200"
-                width="200"
-                src={getImageUrl(playerB())}
-                alt={`profile photo of ${capitalise(playerB())}`}
               />
             </div>
           </>
@@ -112,12 +100,10 @@ export default function App () {
             {`${winner()} wins!`}
           </h2>
 
-          <img
+          <Photo
+            size="200"
+            name={winner()}
             class="player-photo current-turn winning-photo"
-            height="200"
-            width="200"
-            src={getImageUrl(winner())}
-            alt={`profile photo of ${capitalise(winner())}`}
           />
         </Show>
       }>
@@ -134,11 +120,9 @@ export default function App () {
                 classList={{selected: player === playerA()}}
                 class="player-selection-button"
               >
-                <img
-                  height="150"
-                  width="150"
-                  src={getImageUrl(player)}
-                  alt={`profile photo of ${capitalise(player)}`}
+                <Photo
+                  name={player}
+                  size="150"
                 />
               </button>
             }</For>
@@ -149,14 +133,11 @@ export default function App () {
         <Match when={playing()}>
           <section class="game-wrapper">
             <aside>
-              <img
-                classList={{'current-turn': isPlayerATurn()}}
-                class="player-photo"
-                height="200"
-                width="200"
-                src={getImageUrl(playerA())}
-                alt={`profile photo of ${capitalise(playerA())}`}
               <h3 class="player-name capitalise">{playerA()}</h3>
+              <Photo
+                size="200"
+                name={playerA()}
+                class={`player-photo ${isPlayerATurn() ? `current-turn` : ``}`}
               />
             </aside>
             <fieldset class="game">
@@ -184,14 +165,11 @@ export default function App () {
               </div>
             </fieldset>
             <aside>
-              <img
-                classList={{'current-turn': !isPlayerATurn()}}
-                class="player-photo"
-                height="200"
-                width="200"
-                src={getImageUrl(playerB())}
-                alt={`profile photo of ${capitalise(playerB())}`}
               <h3 class="player-name capitalise">{playerB()}</h3>
+              <Photo
+                size="200"
+                name={playerB()}
+                class={`player-photo ${!isPlayerATurn() ? `current-turn` : ``}`}
               />
             </aside>
           </section>
