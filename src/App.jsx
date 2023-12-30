@@ -1,10 +1,14 @@
 import { createSignal, createMemo, Show, Index, Switch, Match, For } from 'solid-js';
-import './app.css';
 import Fireworks from '@fireworks-js/solid';
+
 import Photo from './components/Photo';
+
+import './app.css';
+
 import crossImg from './assets/cross.svg';
 import noughtImg from './assets/nought.svg';
 import starImg from './assets/star.svg';
+import rotateImg from './assets/rotate.svg';
 
 export default function App () {
   // CONSTANTS
@@ -97,8 +101,7 @@ export default function App () {
     <>
       <header>
         <h1 class="title">
-          <span>Merry Christmas</span>
-          <span class="barbie">River</span>
+          Merry Christmas River
         </h1>
       </header>
 
@@ -220,13 +223,13 @@ export default function App () {
             class="reset-button"
             onClick={resetGameState}
           >
-          Play Again?
+            Play Again?
           </button>
           <button
             class="reset-button"
             onClick={resetCharacters}
           >
-          Change Characters?
+            Change Characters?
           </button>
         </div>
       </Show>

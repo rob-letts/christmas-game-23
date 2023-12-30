@@ -17,12 +17,8 @@ body {
   justify-content: center;
   gap: 5px;
   align-items: center;
-}
-
-.barbie {
   letter-spacing: 4px;
   font-family: "Bartex";
-  font-size: 1.5em;
   padding-left: 3px;
 }
 
@@ -55,7 +51,7 @@ body {
   grid-template-columns: repeat(3, var(--cell-size));
   grid-template-rows: repeat(3, var(--cell-size));
   column-gap: 3rem;
-  place-content: center;
+  place-items: center;
   row-gap: 3rem;
 }
 
@@ -158,7 +154,7 @@ body {
 
 .selected,
 .current-turn {
-  outline: 4px solid gold;
+  outline: 4px solid #f2ff00;
 
   & > img {
     filter: grayscale(1);
