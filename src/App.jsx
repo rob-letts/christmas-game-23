@@ -1,5 +1,6 @@
 import { createSignal, createMemo, Show, Index, Switch, Match, For } from 'solid-js';
 import './app.css';
+import Fireworks from '@fireworks-js/solid';
 import Photo from './components/Photo';
 import crossImg from './assets/cross.svg';
 import noughtImg from './assets/nought.svg';
@@ -108,6 +109,7 @@ export default function App () {
             name={winner()}
             class="player-photo current-turn winning-photo"
           />
+          <Fireworks class="fireworks" />
         </Show>
       }>
         {/* Character Selection */}
