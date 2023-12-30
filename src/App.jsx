@@ -230,6 +230,15 @@ export default function App () {
           </button>
         </div>
       </Show>
+
+      <Show when={!characterSelection() && !winner()}>
+        <button
+          class="switch-button"
+          onClick={resetCharacters}
+        >
+          <img src={rotateImg} height="25" width="25" />
+        </button>
+      </Show>
     </>
   );
 }
