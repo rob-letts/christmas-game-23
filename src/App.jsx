@@ -1,6 +1,8 @@
 import { createSignal, createMemo, Show, Index, Switch, Match, For } from 'solid-js';
 import './app.css';
 import Photo from './components/Photo';
+import crossImg from './assets/cross.svg';
+import noughtImg from './assets/nought.svg';
 
 export default function App () {
   // CONSTANTS
@@ -132,20 +134,25 @@ export default function App () {
 
         {/* Playing Game */}
         <Match when={playing()}>
+          <h2 class="subheading capitalise">
+            {isPlayerATurn() ? playerA() : playerB()}'s Turn
+          </h2>
           <section class="game-wrapper">
-            <aside>
-              <h3 class="player-name capitalise">{playerA()}</h3>
+            <aside class="player-photo-wrapper">
               <Photo
                 size="200"
                 name={playerA()}
-                class={`player-photo ${isPlayerATurn() ? `current-turn` : ``}`}
+                class="player-photo"
+              />
+              <img
+                src={noughtImg}
+                classList={{ 'current-turn': isPlayerATurn() }}
+                class="player-icon left"
+                height="50"
+                width="50"
               />
             </aside>
             <fieldset class="game">
-              <legend class="game-legend capitalise">
-                {isPlayerATurn() ? playerA() : playerB()}'s Turn
-              </legend>
-
               <div class="checkbox-grid">
                 <Index each={checks()}>
                   {(_, index) =>
@@ -165,12 +172,18 @@ export default function App () {
                 </Index>
               </div>
             </fieldset>
-            <aside>
-              <h3 class="player-name capitalise">{playerB()}</h3>
+            <aside class="player-photo-wrapper">
               <Photo
                 size="200"
                 name={playerB()}
-                class={`player-photo ${!isPlayerATurn() ? `current-turn` : ``}`}
+                class="player-photo"
+              />
+              <img
+                src={crossImg}
+                classList={{ 'current-turn': !isPlayerATurn() }}
+                class="player-icon right"
+                height="50"
+                width="50"
               />
             </aside>
           </section>
