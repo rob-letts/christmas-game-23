@@ -238,6 +238,21 @@
   }
 }
 
+.star {
+  position: absolute;
+  pointer-events: none;
+  animation: star 1s linear forwards;
+}
+
+@keyframes star {
+  to {
+    translate: 0 100px;
+    opacity: 0;
+    rotate: 360deg;
+    scale: 0
+  }
+}
+
 .fireworks {
   position: absolute;
   width: 100vw;

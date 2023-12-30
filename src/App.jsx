@@ -4,6 +4,7 @@ import Fireworks from '@fireworks-js/solid';
 import Photo from './components/Photo';
 import crossImg from './assets/cross.svg';
 import noughtImg from './assets/nought.svg';
+import starImg from './assets/star.svg';
 
 export default function App () {
   // CONSTANTS
@@ -20,6 +21,26 @@ export default function App () {
   const [checks, setChecks] = createSignal(emptyCheckBoard);
   const [turn, setTurn] = createSignal(0);
   const isPlayerATurn = createMemo(() => turn() % 2 === 0);
+
+  let debounce = false;
+  setInterval(() => debounce = false, 150);
+
+
+  window.onmousemove = e => {
+    if (debounce) return;
+
+    const x = e.clientX / window.innerWidth;
+    const y = e.clientY / window.innerHeight;
+    const star = document.createElement(`img`);
+    star.classList.add(`star`);
+    star.src = starImg;
+    star.style.left = `${x * 100}%`;
+    star.style.top = `${y * 100}%`;
+    document.body.appendChild(star);
+    debounce = true;
+
+    setTimeout(() => document.body.removeChild(star), 1000);
+  };
 
   // GAME LOGIC
   function resetCharacters () {
